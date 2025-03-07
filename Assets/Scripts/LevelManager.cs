@@ -11,9 +11,16 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene(level);
     }
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
     void Start()
     {
-        Levels_completed();
+        if (levelButtons.Length > 0)
+        {
+            Levels_completed();
+        }
     }
     public void Levels_completed()
     {

@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using System.Collections.Generic;
 
 public class Password_submit : MonoBehaviour, IInteractable
 {
@@ -12,12 +13,14 @@ public class Password_submit : MonoBehaviour, IInteractable
     public string Name = "Open";
 
     string IInteractable.Name { get => Name; set => Name = value; }
-
+    [SerializeField] private StoryTeller storyTeller; // assign the StoryTeller script
     public void Interact()
     {
         if (!door.isOpen && !door.isAnimating)
         {
             InteractionManager.IsInteractionActive = true;
+
+            StartCoroutine(storyTeller.Send_message(new List<string> { "قبل أن تخطو أولى خطواتك في هذه الرحلة الغامضة، عليك فتح البوابة الأولى. لإنجاز ذلك، أدخل كلمة مرورك الخاصة—أمر بسيط، أليس كذلك؟ بمجرد انتهائك، ستبدأ مغامرتك الحقيقية!" }));
             if (passwordPanel != null)
                 passwordPanel.SetActive(true);
             if (passwordInput != null)
@@ -55,5 +58,6 @@ public class Password_submit : MonoBehaviour, IInteractable
         door = GetComponent<Door>();
         if (passwordPanel != null)
             passwordPanel.SetActive(false);
+
     }
 }

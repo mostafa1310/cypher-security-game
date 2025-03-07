@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class Check_Pass : MonoBehaviour, IInteractable
 {
@@ -11,6 +12,7 @@ public class Check_Pass : MonoBehaviour, IInteractable
     public string Name = "Open";
 
     string IInteractable.Name { get => Name; set => Name = value; }
+    [SerializeField] private StoryTeller storyTeller; // assign the StoryTeller script
 
     void Start()
     {
@@ -46,6 +48,7 @@ public class Check_Pass : MonoBehaviour, IInteractable
         {
             if (passwordPanel != null)
                 passwordPanel.SetActive(false);
+            StartCoroutine(storyTeller.Send_message(new List<string> { "تهانينا! لقد اجتزت التحدي الأول وأثبت جدارتك كمغامر حقيقي. لكن لا يزال أمامك طريق طويل… والآن، حان الوقت لاختبار ما تعلمته! أدخل كلمة مرور جديدة وفقًا لما اكتسبته من معرفة، ثم استعد للمرحلة التالية!" }));
             InteractionManager.IsInteractionActive = false;
             gameObject.tag = "Untagged";
             StartCoroutine(door.OpenDoor());

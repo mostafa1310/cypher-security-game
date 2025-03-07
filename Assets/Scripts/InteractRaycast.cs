@@ -8,6 +8,7 @@ public class InteractRaycast : MonoBehaviour
     [SerializeField] private Button interactionPrompt; // assign a TMP Text UI element (e.g., "E" prompt)
     [SerializeField] private float interactDistance = 5f; // max raycast distance
 
+
     void Update()
     {
         if (InteractionManager.IsInteractionActive)
@@ -26,10 +27,7 @@ public class InteractRaycast : MonoBehaviour
                 interactionPrompt.transform.GetChild(0).GetComponent<TMP_Text>().text = hit.collider.GetComponent<IInteractable>().Name;
                 interactionPrompt.gameObject.SetActive(true);
                 interactionPrompt.onClick.RemoveAllListeners();
-                interactionPrompt.onClick.AddListener(() =>
-                {
-                    hit.collider.GetComponent<IInteractable>()?.Interact();
-                });
+                interactionPrompt.onClick.AddListener(delegate { hit.collider.GetComponent<IInteractable>()?.Interact(); });
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     hit.collider.GetComponent<IInteractable>()?.Interact();
