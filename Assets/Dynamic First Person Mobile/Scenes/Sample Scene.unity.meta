@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: bf95d34ab83b5ac40911f9e77a91a236
-NativeFormatImporter:
+guid: e6d99aad7379a1d42a740a623d5f5247
+DefaultImporter:
   externalObjects: {}
-  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -11,6 +10,5 @@ AssetOrigin:
   productId: 221202
   packageName: Dynamic First Person Mobile Controller Kit
   packageVersion: 1.0.2
-  assetPath: Assets/ModularFirstPersonController/DemoScene/Gridbox Prototype Materials/Resources/ProBuilder
-    Data/Prototype Materials.asset
+  assetPath: Assets/Dynamic First Person Mobile/Scenes/Sample Scene.unity
   uploadId: 506490

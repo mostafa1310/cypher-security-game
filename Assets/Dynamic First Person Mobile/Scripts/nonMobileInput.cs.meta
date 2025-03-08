@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: bf95d34ab83b5ac40911f9e77a91a236
-NativeFormatImporter:
+guid: 019f44b186ecc2f45baa6cee65f02c42
+MonoImporter:
   externalObjects: {}
-  mainObjectFileID: 11400000
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -11,6 +14,5 @@ AssetOrigin:
   productId: 221202
   packageName: Dynamic First Person Mobile Controller Kit
   packageVersion: 1.0.2
-  assetPath: Assets/ModularFirstPersonController/DemoScene/Gridbox Prototype Materials/Resources/ProBuilder
-    Data/Prototype Materials.asset
+  assetPath: Assets/Dynamic First Person Mobile/Scripts/nonMobileInput.cs
   uploadId: 506490

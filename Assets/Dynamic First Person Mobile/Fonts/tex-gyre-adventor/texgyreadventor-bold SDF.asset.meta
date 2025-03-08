@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bf95d34ab83b5ac40911f9e77a91a236
+guid: 8539f543bfd914b4c93b224aa846885e
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
@@ -11,6 +11,6 @@ AssetOrigin:
   productId: 221202
   packageName: Dynamic First Person Mobile Controller Kit
   packageVersion: 1.0.2
-  assetPath: Assets/ModularFirstPersonController/DemoScene/Gridbox Prototype Materials/Resources/ProBuilder
-    Data/Prototype Materials.asset
+  assetPath: Assets/Dynamic First Person Mobile/Fonts/tex-gyre-adventor/texgyreadventor-bold
+    SDF.asset
   uploadId: 506490
