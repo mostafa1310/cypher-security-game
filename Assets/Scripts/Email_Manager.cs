@@ -10,6 +10,7 @@ public class Email_Manager : MonoBehaviour
     public Transform emailsParent_menu;
     public Transform emailsList_menu;
     public Transform emailParent_view;
+    public static bool Email_Active;
     private void Start()
     {
         add_email("Welcome to the game", "Welcome to the game, we hope you enjoy it", "01/01/2021");
@@ -17,7 +18,7 @@ public class Email_Manager : MonoBehaviour
     }
     public void open_mail_menu()
     {
-        InteractionManager.IsInteractionActive = true;
+        Email_Active = true;
         emailsParent_menu.gameObject.SetActive(true);
         foreach (Transform child in emailsList_menu.transform)
         {
@@ -34,7 +35,7 @@ public class Email_Manager : MonoBehaviour
     }
     public void CancelInteraction()
     {
-        InteractionManager.IsInteractionActive = false;
+        Email_Active = false;
     }
     public void open_email(Email email)
     {

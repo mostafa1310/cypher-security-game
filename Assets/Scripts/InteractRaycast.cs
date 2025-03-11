@@ -11,7 +11,7 @@ public class InteractRaycast : MonoBehaviour
 
     void Update()
     {
-        if (InteractionManager.IsInteractionActive)
+        if (InteractionManager.IsInteractionActive || Email_Manager.Email_Active)
         {
             interactionPrompt.gameObject.SetActive(false);
             return;

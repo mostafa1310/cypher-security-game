@@ -6,7 +6,7 @@ using RTLTMPro;
 public class TypewriterEffect : MonoBehaviour
 {
     public RTLTextMeshPro storyText; // assign your UI TMP_Text element in the inspector
-    [SerializeField] private float charDelay = 0.05f; // delay between characters
+    // [SerializeField] private float charDelay = 0.05f; // delay between characters
 
     public void ShowMessage(string message)
     {

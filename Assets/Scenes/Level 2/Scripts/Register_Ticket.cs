@@ -17,6 +17,7 @@ public class Register_Ticket : MonoBehaviour, IInteractable
 
     private bool isEmailSent = false;
     private string sentCode = "";
+    [SerializeField] private Fence fence;
 
     void Start()
     {
@@ -35,7 +36,6 @@ public class Register_Ticket : MonoBehaviour, IInteractable
                 EmailInput.text = "";
             if (feedbackText != null)
                 feedbackText.text = "";
-            isEmailSent = false; // reset verification stage
         }
     }
 
@@ -104,6 +104,7 @@ public class Register_Ticket : MonoBehaviour, IInteractable
                 if (EmailPanal != null)
                     EmailPanal.SetActive(false);
                 InteractionManager.IsInteractionActive = false;
+                StartCoroutine(fence.OpenDoor());
                 gameObject.tag = "Untagged";
             }
             else

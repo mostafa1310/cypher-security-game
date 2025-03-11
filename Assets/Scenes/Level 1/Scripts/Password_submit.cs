@@ -47,7 +47,7 @@ public class Password_submit : MonoBehaviour, IInteractable
         }
         if (passwordPanel != null)
             passwordPanel.SetActive(false);
-        PlayerPrefs.SetString("password", passwordInput.text);
+        PlayerPrefs.SetString("Password", passwordInput.text);
         InteractionManager.IsInteractionActive = false;
         gameObject.tag = "Untagged";
         StartCoroutine(door.OpenDoor());
