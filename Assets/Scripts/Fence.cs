@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.Events;
 
 public class Fence : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Fence : MonoBehaviour
     private Quaternion openRotation;
     public bool isOpen = false;
     public bool isAnimating = false;
+    public UnityEvent open_callback;
 
     void Start()
     {
@@ -30,5 +32,6 @@ public class Fence : MonoBehaviour
         transform.rotation = openRotation;
         isOpen = true;
         isAnimating = false;
+        open_callback.Invoke();
     }
 }

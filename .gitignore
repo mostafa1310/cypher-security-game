@@ -74,3 +74,7 @@ crashlytics-build.properties
 /.vscode
 /APP
 /.utmp
+Assets/Scenes/Level 1/Level 1/OcclusionCullingData.asset
+Assets/Scenes/Level 1/Level 1/OcclusionCullingData.asset.meta
+Assets/Scenes/Level 2/Level 2/OcclusionCullingData.asset
+Assets/Scenes/Level 2/Level 2/OcclusionCullingData.asset.meta

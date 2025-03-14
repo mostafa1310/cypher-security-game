@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using System;
+using UnityEngine.Events;
 
 public class Chest : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class Chest : MonoBehaviour
     private Quaternion openRotation;
     public bool isOpen = false;
     public bool isAnimating = false;
+    public UnityEvent open_callback;
 
     void Start()
     {
@@ -30,5 +33,7 @@ public class Chest : MonoBehaviour
         transform.rotation = openRotation;
         isOpen = true;
         isAnimating = false;
+        open_callback.Invoke();
+        // End_panel.SetActive(true);
     }
 }

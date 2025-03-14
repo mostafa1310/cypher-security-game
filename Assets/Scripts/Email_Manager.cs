@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Email_Manager : MonoBehaviour
 {
@@ -10,8 +11,8 @@ public class Email_Manager : MonoBehaviour
     public Transform emailsParent_menu;
     public Transform emailsList_menu;
     public Transform emailParent_view;
-    public static bool Email_Active;
-    private void Start()
+    public static bool Email_Active = false;
+    private void Awake()
     {
         add_email("Welcome to the game", "Welcome to the game, we hope you enjoy it", "01/01/2021");
         add_email("New level unlocked", "You have unlocked a new level", "02/01/2021");
@@ -20,18 +21,22 @@ public class Email_Manager : MonoBehaviour
     {
         Email_Active = true;
         emailsParent_menu.gameObject.SetActive(true);
-        foreach (Transform child in emailsList_menu.transform)
+        if (emailsList_menu.childCount > 0)
         {
-            Destroy(child.gameObject);
+            foreach (Transform child in emailsList_menu.transform)
+            {
+                Destroy(child.gameObject);
+            }
         }
         foreach (Email email in emails)
         {
             GameObject emailObject = Instantiate(emailPrefab_overview, emailsList_menu);
-            emailObject.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text = email.subject;
-            emailObject.transform.GetChild(1).GetComponent<TMPro.TMP_Text>().text = email.date;
+            emailObject.transform.GetChild(0).GetComponent<TMP_Text>().text = email.subject;
+            emailObject.transform.GetChild(1).GetComponent<TMP_Text>().text = email.date;
             Button button = emailObject.GetComponent<Button>();
             button.onClick.AddListener(delegate { open_email(email); });
         }
+        Debug.Log("Emails opened");
     }
     public void CancelInteraction()
     {
@@ -41,9 +46,9 @@ public class Email_Manager : MonoBehaviour
     {
         emailParent_view.gameObject.SetActive(true);
         emailsParent_menu.gameObject.SetActive(false);
-        emailParent_view.GetChild(0).GetComponent<TMPro.TMP_Text>().text = email.subject;
-        emailParent_view.GetChild(1).GetComponent<TMPro.TMP_Text>().text = email.date;
-        emailParent_view.GetChild(2).GetComponent<TMPro.TMP_Text>().text = email.body;
+        emailParent_view.GetChild(0).GetComponent<TMP_Text>().text = email.subject;
+        emailParent_view.GetChild(1).GetComponent<TMP_Text>().text = email.date;
+        emailParent_view.GetChild(2).GetComponent<TMP_Text>().text = email.body;
     }
     public void add_email(string subject, string body, string date)
     {

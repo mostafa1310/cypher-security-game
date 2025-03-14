@@ -76,7 +76,7 @@ public class Register_Ticket : MonoBehaviour, IInteractable
         if (!isEmailSent)
         {
             // Check if the entered email is valid.
-            if (!IsValidEmail(EmailInput.text))
+            if (!IsValidEmail(EmailInput.text.Trim()))
             {
                 if (feedbackText != null)
                     feedbackText.text = "Entered email is not valid!";
@@ -89,6 +89,7 @@ public class Register_Ticket : MonoBehaviour, IInteractable
             {
                 string currentDate = DateTime.Now.ToString("dd/MM/yyyy");
                 emailManager.add_email("Verification Code", "Your code is: " + sentCode, currentDate);
+                Debug.Log($"email code is:{sentCode}");
             }
             isEmailSent = true;
             if (feedbackText != null)
