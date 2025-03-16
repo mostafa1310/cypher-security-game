@@ -10,7 +10,6 @@ public class Register_Ticket : MonoBehaviour, IInteractable
     [SerializeField] private TMP_Text feedbackText; // text to display feedback message
     [SerializeField] private Email_Manager emailManager; // reference to email manager to send code
 
-    [SerializeField] private bool Ticket_done = false;
     public string Name = "Buy";
 
     string IInteractable.Name { get => Name; set => Name = value; }
@@ -27,16 +26,13 @@ public class Register_Ticket : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (!Ticket_done)
-        {
-            InteractionManager.IsInteractionActive = true;
-            if (EmailPanal != null)
-                EmailPanal.SetActive(true);
-            if (EmailInput != null)
-                EmailInput.text = "";
-            if (feedbackText != null)
-                feedbackText.text = "";
-        }
+        InteractionManager.IsInteractionActive = true;
+        if (EmailPanal != null)
+            EmailPanal.SetActive(true);
+        if (EmailInput != null)
+            EmailInput.text = "";
+        if (feedbackText != null)
+            feedbackText.text = "";
     }
 
     public void CancelInteraction()

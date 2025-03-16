@@ -12,11 +12,6 @@ public class Email_Manager : MonoBehaviour
     public Transform emailsList_menu;
     public Transform emailParent_view;
     public static bool Email_Active = false;
-    private void Awake()
-    {
-        add_email("Welcome to the game", "Welcome to the game, we hope you enjoy it", "01/01/2021");
-        add_email("New level unlocked", "You have unlocked a new level", "02/01/2021");
-    }
     public void open_mail_menu()
     {
         Email_Active = true;
