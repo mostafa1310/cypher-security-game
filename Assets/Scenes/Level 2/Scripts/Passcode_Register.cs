@@ -14,9 +14,15 @@ public class Passcode_Register : MonoBehaviour, IInteractable
     public string Name = "Open";
 
     string IInteractable.Name { get => Name; set => Name = value; }
-    // [SerializeField] private StoryTeller storyTeller; // assign the StoryTeller script
+    [SerializeField] private StoryTeller storyTeller; // assign the StoryTeller script
+    [SerializeField] bool first_interact = false;
     public void Interact()
     {
+        if (!first_interact)
+        {
+            first_interact = true;
+            StartCoroutine(storyTeller.Send_message(new List<string> { "لفتح الصندوق، عليك إنشاء رمز أمان (Passcode) خاص بك. تأكد من أنه آمن وسري، لأنك ستحتاجه لاحقًا!" }));
+        }
         if (!chest.isOpen && !chest.isAnimating)
         {
             InteractionManager.IsInteractionActive = true;
@@ -50,6 +56,7 @@ public class Passcode_Register : MonoBehaviour, IInteractable
             PasscodePanel.SetActive(false);
         PlayerPrefs.SetString("Passcode", PasscodeInput.text);
         InteractionManager.IsInteractionActive = false;
+        StartCoroutine(storyTeller.Send_message(new List<string> { "رائع! لقد تم تأمين الكنز باستخدام رمزك السري. لا تنسه، فقد تحتاجه قريبًا!" }));
         gameObject.tag = "Untagged";
         StartCoroutine(chest.OpenDoor());
     }

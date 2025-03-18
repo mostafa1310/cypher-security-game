@@ -44,8 +44,10 @@ public class Authenticate_Safe : MonoBehaviour, IInteractable
     {
         if (AuthenticatePanel != null)
             AuthenticatePanel.SetActive(false);
+#if UNITY_EDITOR
         print($"Password: {PlayerPrefs.GetString("Password")}");
         print($"Passcode: {PlayerPrefs.GetString("Passcode")}");
+#endif
     }
     private bool IsValidEmail(string email)
     {

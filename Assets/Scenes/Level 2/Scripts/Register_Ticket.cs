@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using System.Text.RegularExpressions; // added for email validation
 using System;
+using System.Collections.Generic;
 
 public class Register_Ticket : MonoBehaviour, IInteractable
 {
@@ -17,6 +18,8 @@ public class Register_Ticket : MonoBehaviour, IInteractable
     private bool isEmailSent = false;
     private string sentCode = "";
     [SerializeField] private Fence fence;
+    [SerializeField] private StoryTeller storyTeller; // assign the StoryTeller script
+    [SerializeField] bool first_interact = false;
 
     void Start()
     {
@@ -26,6 +29,11 @@ public class Register_Ticket : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        if (!first_interact)
+        {
+            first_interact = true;
+            StartCoroutine(storyTeller.Send_message(new List<string> { "مرحبًا أيها المغامر! قبل أن تحصل على تذكرتك، عليك إدخال بيانات بريدك الإلكتروني." }));
+        }
         InteractionManager.IsInteractionActive = true;
         if (EmailPanal != null)
             EmailPanal.SetActive(true);
@@ -92,22 +100,26 @@ public class Register_Ticket : MonoBehaviour, IInteractable
                 feedbackText.text = "Verification code sent. Please enter the code.";
             EmailInput.text = "";
             EmailInput.placeholder.GetComponent<TMP_Text>().text = "Enter verification code";
+            StartCoroutine(storyTeller.Send_message(new List<string> { "لقد وصلتك رسالة تحتوي على رمز الدخول. أدخله الآن للحصول على تذكرتك." }));
         }
         else
         {
             // Now verify the entered code.
             if (EmailInput.text == sentCode)
             {
+                // StartCoroutine(storyTeller.Send_message(new List<string> { "رائع! لقد حصلت على تذكرتك. يمكنك الآن الصعود إلى السفينة!" }));
                 if (EmailPanal != null)
                     EmailPanal.SetActive(false);
                 InteractionManager.IsInteractionActive = false;
                 StartCoroutine(fence.OpenDoor());
                 gameObject.tag = "Untagged";
+                StartCoroutine(storyTeller.Send_message(new List<string> { "رائع! لقد حصلت على تذكرتك. يمكنك الآن الصعود إلى السفينة!", "ها قد وصلت إلى داخل السفينة، وبينما تتجول، تكتشف شيئًا مذهلًا… صندوق كنز مغلق بآلية أمان مشددة!" }));
             }
             else
             {
                 if (feedbackText != null)
                     feedbackText.text = "Wrong verification code!";
+                StartCoroutine(storyTeller.Send_message(new List<string> { "عذرًا، هذا الرمز غير صحيح! عليك البحث عن حل آخر." }));
             }
         }
     }

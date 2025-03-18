@@ -49,6 +49,7 @@ public class Check_Pass : MonoBehaviour, IInteractable
             if (passwordPanel != null)
                 passwordPanel.SetActive(false);
             StartCoroutine(storyTeller.Send_message(new List<string> { "تهانينا! لقد اجتزت التحدي الأول وأثبت جدارتك كمغامر حقيقي. لكن لا يزال أمامك طريق طويل… والآن، حان الوقت لاختبار ما تعلمته! أدخل كلمة مرور جديدة وفقًا لما اكتسبته من معرفة، ثم استعد للمرحلة التالية!" }));
+            PlayerPrefs.SetString("Password", passwordInput.text);
             InteractionManager.IsInteractionActive = false;
             gameObject.tag = "Untagged";
             StartCoroutine(door.OpenDoor());
