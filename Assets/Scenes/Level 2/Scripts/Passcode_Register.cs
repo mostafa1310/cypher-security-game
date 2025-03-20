@@ -59,6 +59,7 @@ public class Passcode_Register : MonoBehaviour, IInteractable
         StartCoroutine(storyTeller.Send_message(new List<string> { "رائع! لقد تم تأمين الكنز باستخدام رمزك السري. لا تنسه، فقد تحتاجه قريبًا!" }));
         gameObject.tag = "Untagged";
         StartCoroutine(chest.OpenDoor());
+        PlayerPrefs.SetInt("HighestLevelCompleted", 2);
     }
 
     void Start()

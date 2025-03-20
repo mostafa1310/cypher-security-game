@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -11,14 +12,22 @@ public class Authenticate_Safe : MonoBehaviour, IInteractable
     [SerializeField] Vault vault;
     [SerializeField] private Email_Manager emailManager; // reference to email manager to send code
     private bool isEmailSent = false;
-    private bool isEmailVerified = false;
+    private bool isPasscodeVerified = false;
+    private bool isPasswordVerified = false;
     private string sentCode = "";
     public string Name = "Open";
 
     string IInteractable.Name { get => Name; set => Name = value; }
+    [SerializeField] private StoryTeller storyTeller; // assign the StoryTeller script
+    [SerializeField] bool first_interact = false;
 
     public void Interact()
     {
+        if (!first_interact)
+        {
+            first_interact = true;
+            StartCoroutine(storyTeller.Send_message(new List<string> { "لإتمام العملية، عليك إدخال كلمة مرور قوية. تذكر تلك التي أنشأتها سابقًا؟ حان وقت استخدامها!" }));
+        }
         if (!vault.isOpen && !vault.isAnimating)
         {
             InteractionManager.IsInteractionActive = true;
@@ -48,21 +57,7 @@ public class Authenticate_Safe : MonoBehaviour, IInteractable
         print($"Password: {PlayerPrefs.GetString("Password")}");
         print($"Passcode: {PlayerPrefs.GetString("Passcode")}");
 #endif
-    }
-    private bool IsValidEmail(string email)
-    {
-        if (string.IsNullOrEmpty(email))
-            return false;
-        try
-        {
-            return Regex.IsMatch(email,
-                @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
-                RegexOptions.IgnoreCase);
-        }
-        catch (Exception)
-        {
-            return false;
-        }
+        // StartCoroutine(storyTeller.Send_message(new List<string> { "بعد رحلتك الطويلة، وصلت أخيرًا إلى البنك، حيث سيتم تأمين كنزك إلى الأبد. ولكن قبل أن تتمكن من ذلك، عليك اجتياز التحقق الأخير!" }));
     }
 
     // Generates a random 6-digit code.
@@ -74,7 +69,7 @@ public class Authenticate_Safe : MonoBehaviour, IInteractable
 
     public void SubmitAuthenticate()
     {
-        if (!isEmailSent)
+        if (!isPasswordVerified && !isEmailSent)
         {
             // Check if the entered email is valid.
             if (AuthenticateInput.text != PlayerPrefs.GetString("Password"))
@@ -83,61 +78,62 @@ public class Authenticate_Safe : MonoBehaviour, IInteractable
                     feedbackText.text = "Invalid password!";
                 return;
             }
-            // Email is valid; generate a verification code.
-            sentCode = GenerateRandomCode();
-            // Send the code using the Email_Manager (e.g., by adding an email with the code).
-            if (emailManager != null)
-            {
-                string currentDate = DateTime.Now.ToString("dd/MM/yyyy");
-                emailManager.add_email("Verification Code", "Your code is: " + sentCode, currentDate);
-                Debug.Log($"email code is:{sentCode}");
-            }
-            else
-            {
-                Debug.Log("Email Manager is not assigned!");
-                return;
-            }
-            isEmailSent = true;
-            if (feedbackText != null)
-                feedbackText.text = "Verification code sent. Please enter the code.";
+            isPasswordVerified = true;
+            AuthenticateInput.placeholder.GetComponent<TMP_Text>().text = "Enter passcode";
             AuthenticateInput.text = "";
-            AuthenticateInput.placeholder.GetComponent<TMP_Text>().text = "Enter verification code";
+            StartCoroutine(storyTeller.Send_message(new List<string> { "الآن، أدخل رمز الأمان (Passcode) الذي أنشأته في السفينة." }));
+            if (feedbackText != null)
+                feedbackText.text = "Password verified!";
         }
-        else
+        else if (!isPasscodeVerified && !isEmailSent)
         {
-            if (!isEmailVerified)
+            if (AuthenticateInput.text == PlayerPrefs.GetString("Passcode"))
             {
-                // Now verify the entered code.
-                if (AuthenticateInput.text == sentCode)
+                isPasscodeVerified = true;
+                // Email is valid; generate a verification code.
+                sentCode = GenerateRandomCode();
+                // Send the code using the Email_Manager (e.g., by adding an email with the code).
+                if (emailManager != null)
                 {
-                    if (feedbackText != null)
-                        feedbackText.text = "Verification successful!";
-                    isEmailVerified = true;
-                    AuthenticateInput.text = "";
-                    AuthenticateInput.placeholder.GetComponent<TMP_Text>().text = "Enter Your Passcode:";
+                    string currentDate = DateTime.Now.ToString("dd/MM/yyyy");
+                    emailManager.add_email("Verification Code", "Your code is: " + sentCode, currentDate);
+                    Debug.Log($"email code is:{sentCode}");
                 }
                 else
                 {
-                    if (feedbackText != null)
-                        feedbackText.text = "Invalid code!";
+                    Debug.Log("Email Manager is not assigned!");
+                    return;
                 }
+                isEmailSent = true;
+                if (feedbackText != null)
+                    feedbackText.text = "Verification code sent. Please enter the code.";
+                AuthenticateInput.text = "";
+                AuthenticateInput.placeholder.GetComponent<TMP_Text>().text = "Enter verification code";
+                StartCoroutine(storyTeller.Send_message(new List<string> { "خطوة أخيرة! لإثبات هويتك، عليك التحقق من بريدك الإلكتروني عبر نظام (Email Authentication)." }));
             }
             else
             {
-                if (AuthenticateInput.text == PlayerPrefs.GetString("Passcode"))
-                {
-                    if (AuthenticatePanel != null)
-                        AuthenticatePanel.SetActive(false);
-                    InteractionManager.IsInteractionActive = false;
-                    StartCoroutine(vault.OpenDoor());
-                    gameObject.tag = "Untagged";
-                }
-                else
-                {
-                    if (feedbackText != null)
-                        feedbackText.text = "Wrong Passcode!";
-                }
+                if (feedbackText != null)
+                    feedbackText.text = "Wrong Passcode!";
             }
         }
+        else if (isEmailSent)
+        {
+            if (AuthenticateInput.text == sentCode)
+            {
+                if (AuthenticatePanel != null)
+                    AuthenticatePanel.SetActive(false);
+                InteractionManager.IsInteractionActive = false;
+                StartCoroutine(vault.OpenDoor());
+                gameObject.tag = "Untagged";
+                StartCoroutine(storyTeller.Send_message(new List<string> { "مذهل! لقد أثبت هويتك بنجاح، وتم تأمين كنزك في البنك. مغامرتك انتهت بنجاح، ولكن هل أنت مستعد لتحدٍ جديد؟" }, new List<Action> { () => { vault.open_callback.Invoke(); PlayerPrefs.SetInt("HighestLevelCompleted", 3); } }));
+            }
+            else
+            {
+                if (feedbackText != null)
+                    feedbackText.text = "Invalid code!";
+            }
+        }
+
     }
 }

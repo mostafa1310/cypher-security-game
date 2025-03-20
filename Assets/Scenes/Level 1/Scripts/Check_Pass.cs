@@ -53,6 +53,7 @@ public class Check_Pass : MonoBehaviour, IInteractable
             InteractionManager.IsInteractionActive = false;
             gameObject.tag = "Untagged";
             StartCoroutine(door.OpenDoor());
+            PlayerPrefs.SetInt("HighestLevelCompleted", 1);
         }
         else
         {

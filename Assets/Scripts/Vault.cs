@@ -33,7 +33,7 @@ public class Vault : MonoBehaviour
         transform.rotation = openRotation;
         isOpen = true;
         isAnimating = false;
-        open_callback.Invoke();
+        // open_callback.Invoke();
         // End_panel.SetActive(true);
     }
 }
