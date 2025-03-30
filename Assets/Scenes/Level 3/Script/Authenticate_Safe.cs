@@ -53,10 +53,8 @@ public class Authenticate_Safe : MonoBehaviour, IInteractable
     {
         if (AuthenticatePanel != null)
             AuthenticatePanel.SetActive(false);
-#if UNITY_EDITOR
         print($"Password: {PlayerPrefs.GetString("Password")}");
         print($"Passcode: {PlayerPrefs.GetString("Passcode")}");
-#endif
         // StartCoroutine(storyTeller.Send_message(new List<string> { "بعد رحلتك الطويلة، وصلت أخيرًا إلى البنك، حيث سيتم تأمين كنزك إلى الأبد. ولكن قبل أن تتمكن من ذلك، عليك اجتياز التحقق الأخير!" }));
     }
 
