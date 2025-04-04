@@ -15,10 +15,10 @@ public class FirebaseSignUp : MonoBehaviour
     public TMP_Text feedbackText;
 
     private FirebaseAuth auth;
-    [SerializeField] private int StartGameScreen;
 
     IEnumerator Start()
     {
+        Screen.orientation = ScreenOrientation.Portrait;
         var dependencyTask = FirebaseApp.CheckAndFixDependenciesAsync();
         yield return new WaitUntil(() => dependencyTask.IsCompleted);
         if (dependencyTask.Result == DependencyStatus.Available)
@@ -27,7 +27,8 @@ public class FirebaseSignUp : MonoBehaviour
             // Check if user is already logged in, if so, go to start game screen.
             if (auth.CurrentUser != null)
             {
-                SceneManager.LoadScene(StartGameScreen); // adjust scene name as needed
+                AuthManager.SetLoggedIn(); // Set the logged-in state in PlayerPrefs
+                SceneManager.LoadScene("MainMenu"); // adjust scene name as needed
                 yield break; // Exit Start coroutine
             }
         }
@@ -56,7 +57,8 @@ public class FirebaseSignUp : MonoBehaviour
         yield return new WaitUntil(() => signUpTask.IsCompleted);
         if (signUpTask.Exception != null)
         {
-            feedbackText.text = "Sign Up Failed: " + signUpTask.Exception.Message;
+            print(signUpTask.Exception.ToString());
+            feedbackText.text = "Sign Up Failed";
         }
         else
         {
@@ -66,13 +68,14 @@ public class FirebaseSignUp : MonoBehaviour
             yield return new WaitUntil(() => profileTask.IsCompleted);
             if (profileTask.Exception != null)
             {
-                feedbackText.text = "Display name update failed: " + profileTask.Exception.Message;
+                feedbackText.text = "Display name update failed";
             }
             else
             {
                 feedbackText.text = "Sign Up Successful!";
+                AuthManager.SetLoggedIn(); // Set the logged-in state in PlayerPrefs
                 // Optionally load the start game screen after sign up.
-                SceneManager.LoadScene(StartGameScreen);
+                SceneManager.LoadScene("MainMenu");
             }
         }
     }

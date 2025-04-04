@@ -18,6 +18,7 @@ public class FirebaseLogin : MonoBehaviour
 
     IEnumerator Start()
     {
+        Screen.orientation = ScreenOrientation.Portrait;
         var dependencyTask = FirebaseApp.CheckAndFixDependenciesAsync();
         yield return new WaitUntil(() => dependencyTask.IsCompleted);
         if (dependencyTask.Result == DependencyStatus.Available)
@@ -26,7 +27,8 @@ public class FirebaseLogin : MonoBehaviour
             // Check if user is already logged in, if so, go to start game screen.
             if (auth.CurrentUser != null)
             {
-                SceneManager.LoadScene(StartGameScreen); // adjust scene name as needed
+                AuthManager.SetLoggedIn(); // Set the logged-in state in PlayerPrefs
+                SceneManager.LoadScene("MainMenu"); // adjust scene name as needed
                 yield break; // Exit Start coroutine
             }
         }
@@ -54,13 +56,14 @@ public class FirebaseLogin : MonoBehaviour
         yield return new WaitUntil(() => loginTask.IsCompleted);
         if (loginTask.Exception != null)
         {
-            feedbackText.text = "Login Failed: " + loginTask.Exception.Message;
+            feedbackText.text = "Login Failed";
         }
         else
         {
             feedbackText.text = "Login Successful!";
+            AuthManager.SetLoggedIn(); // Set the logged-in state in PlayerPrefs
             // Optionally load the start game screen here as well.
-            SceneManager.LoadScene(StartGameScreen); // adjust scene name as needed
+            SceneManager.LoadScene("MainMenu"); // adjust scene name as needed
         }
     }
 }
