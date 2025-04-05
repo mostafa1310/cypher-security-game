@@ -18,7 +18,6 @@ public class FirebaseLogin : MonoBehaviour
 
     IEnumerator Start()
     {
-        Screen.orientation = ScreenOrientation.Portrait;
         var dependencyTask = FirebaseApp.CheckAndFixDependenciesAsync();
         yield return new WaitUntil(() => dependencyTask.IsCompleted);
         if (dependencyTask.Result == DependencyStatus.Available)

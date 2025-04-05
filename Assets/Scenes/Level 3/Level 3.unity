@@ -2929,6 +2929,7 @@ GameObject:
   - component: {fileID: 403812428}
   - component: {fileID: 403812427}
   - component: {fileID: 403812429}
+  - component: {fileID: 403812430}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -2987,6 +2988,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelButtons: []
+--- !u!114 &403812430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403812426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988b73c6e73978147a3317a257a28ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenMode: 1
 --- !u!64 &410723146
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14641,9 +14655,21 @@ PrefabInstance:
       value: Menu Manager
       objectReference: {fileID: 0}
     - target: {fileID: 7263878276052500271, guid: 90f9abacac22f3b4889f2c9e1da83ac3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263878276052500271, guid: 90f9abacac22f3b4889f2c9e1da83ac3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 403812429}
+    - target: {fileID: 7263878276052500271, guid: 90f9abacac22f3b4889f2c9e1da83ac3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadLevel_Name
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263878276052500271, guid: 90f9abacac22f3b4889f2c9e1da83ac3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: level selection
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

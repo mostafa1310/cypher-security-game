@@ -1128,12 +1128,20 @@ PrefabInstance:
       value: Menu Manager
       objectReference: {fileID: 0}
     - target: {fileID: 7263878276052500271, guid: 90f9abacac22f3b4889f2c9e1da83ac3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263878276052500271, guid: 90f9abacac22f3b4889f2c9e1da83ac3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 211898721}
     - target: {fileID: 7263878276052500271, guid: 90f9abacac22f3b4889f2c9e1da83ac3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadLevel
+      value: LoadLevel_Name
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263878276052500271, guid: 90f9abacac22f3b4889f2c9e1da83ac3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: level selection
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1464,6 +1472,7 @@ GameObject:
   - component: {fileID: 211898720}
   - component: {fileID: 211898721}
   - component: {fileID: 211898722}
+  - component: {fileID: 211898723}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1529,6 +1538,19 @@ MonoBehaviour:
     \u0644\u0627 \u062A\u0642\u0644\u0642\u060C \u0627\u0644\u0634\u062E\u0635 \u0627\u0644\u0645\u0633\u0624\u0648\u0644
     \u0639\u0646\u0647\u0627 \u0633\u064A\u0632\u0648\u062F\u0643 \u0628\u0645\u0627
     \u062A\u062D\u062A\u0627\u062C."
+--- !u!114 &211898723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211898718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988b73c6e73978147a3317a257a28ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenMode: 1
 --- !u!1001 &212382845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12329,14 +12351,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 211898721}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: LoadLevel
-        m_Mode: 3
+        m_MethodName: LoadLevel_Name
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: level selection
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1851552936

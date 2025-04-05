@@ -7,10 +7,6 @@ public class InteractRaycast : MonoBehaviour
     [SerializeField] private Camera playerCamera; // assign the main camera in the inspector
     [SerializeField] private Button interactionPrompt; // assign a TMP Text UI element (e.g., "E" prompt)
     [SerializeField] private float interactDistance = 5f; // max raycast distance
-    private void Awake()
-    {
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
-    }
     void Update()
     {
         if (InteractionManager.IsInteractionActive || Email_Manager.Email_Active)

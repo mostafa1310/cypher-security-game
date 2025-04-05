@@ -1602,7 +1602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 489.43335, y: -1505.0143}
+  m_AnchoredPosition: {x: 1059.184, y: -1100.8207}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1463006645
@@ -2046,6 +2046,7 @@ GameObject:
   - component: {fileID: 1723547805}
   - component: {fileID: 1723547809}
   - component: {fileID: 1723547810}
+  - component: {fileID: 1723547811}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2165,6 +2166,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelButtons: []
+--- !u!114 &1723547811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723547804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988b73c6e73978147a3317a257a28ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenMode: 0
 --- !u!1 &1735615894
 GameObject:
   m_ObjectHideFlags: 0
