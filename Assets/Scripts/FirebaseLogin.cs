@@ -24,12 +24,12 @@ public class FirebaseLogin : MonoBehaviour
         {
             auth = FirebaseAuth.DefaultInstance;
             // Check if user is already logged in, if so, go to start game screen.
-            if (auth.CurrentUser != null)
-            {
-                AuthManager.SetLoggedIn(); // Set the logged-in state in PlayerPrefs
-                SceneManager.LoadScene("MainMenu"); // adjust scene name as needed
-                yield break; // Exit Start coroutine
-            }
+            // if (auth.CurrentUser != null)
+            // {
+            //     AuthManager.SetLoggedIn(); // Set the logged-in state in PlayerPrefs
+            //     SceneManager.LoadScene("MainMenu"); // adjust scene name as needed
+            //     yield break; // Exit Start coroutine
+            // }
         }
         else
         {

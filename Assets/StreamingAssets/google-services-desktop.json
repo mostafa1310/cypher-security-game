@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1067480775346",
+    "project_id": "cyperawarness",
+    "storage_bucket": "cyperawarness.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067480775346:android:97059a1dd3ed72e694e7ab",
+        "android_client_info": {
+          "package_name": "com.missroro.cypher_security"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDz-_Nvl4G70UaRcBuRLRAbcFNV0UxBbRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
